@@ -76,5 +76,22 @@ pipeline{
                 }
             }
         }
+
+        stage ('Push changed deployment to GitHub'){ 
+            steps{
+                script{
+                    sh """
+                      git config --global user.email "varshneychirag34@gmail.com"
+                      git config --global user.name "chirag0002"
+                      git add deployment.yml
+                      git commit -m "Updated deployment"
+                    """
+
+                    withCredentials([gitUsernamePassword(credentialsId: 'GitHub', gitToolName: 'Default')]) {
+                        git push "https://github.com/chirag0002/GitOps_ArgoCD.git" main
+                    }  
+                }
+            }
+        }
     }
 }
