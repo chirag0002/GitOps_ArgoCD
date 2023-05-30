@@ -27,7 +27,7 @@ pipeline{
             steps{
                 script{
                     git credentialsId: 'GitHub',
-                    url: 'https://github.com/chirag0002/GitOps_ArgoCD',
+                    url: 'https://github.com/chirag0002/GitOps_Argo_CI.git',
                     branch: 'main'
                 }
             }
@@ -64,32 +64,10 @@ pipeline{
             }
         }
 
-        stage ('Update Kubernetes Deployment'){
-
+        stage ('trigger congig CD changes'){
             steps{
                 script{
-                    sh """
-                    cat deployment.yml
-                    sed -i 's/${APP_NAME}.*/${APP_NAME}:${IMAGE_TAG}/g' deployment.yml
-                    cat deployment.yml
-                    """
-                }
-            }
-        }
-
-        stage ('Push changed deployment to GitHub'){ 
-            steps{
-                script{
-                    sh """
-                      git config --global user.email "varshneychirag34@gmail.com"
-                      git config --global user.name "chirag0002"
-                      git add deployment.yml
-                      git commit -m "Updated deployment"
-                    """
-
-                    withCredentials([gitUsernamePassword(credentialsId: 'GitHub', gitToolName: 'Default')]) {
-                        sh "git push https://github.com/chirag0002/GitOps_ArgoCD.git main"
-                    }  
+                    sh "curl -v -k -user chirag:11b5fc0958c09d3380e33c97d64cb619e0 -X POST -H 'cache-control: no-cache' -H 'content-type: application/x-ww-form-urlencoded' -data 'IMAGE_TAG=${IMAGE_TAG}' 'http://13.233.0.44:8080/job/GitOps_CD/buildWithParameters?token=token'"
                 }
             }
         }
