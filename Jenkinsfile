@@ -75,5 +75,17 @@ pipeline{
                 }
             }
         }
+
+        stage('Trigger Job') {
+            steps {
+                script {
+                    def IMAGE_TAG = "${BUILD_NUMBER}"
+                    build job: 'GitOps_CD',
+                          parameters: [
+                              string(name: 'IMAGE_TAG', value: IMAGE_TAG),
+                          ]
+                }
+            }
+        }
     }
 }
