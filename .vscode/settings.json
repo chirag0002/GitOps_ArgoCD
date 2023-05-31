@@ -1,9 +1,9 @@
 {
     "jenkins-runner.jobs": {
-        "GitOps": {
+        "GitOps_CI": {
             "isDefault": true,
             "runWith": "Jenkins-Initial",
-            "name": "GitOps_CD",
+            "name": "GitOps_CI",
         }  
     },
     "jenkins-runner.hostConfigs": {
