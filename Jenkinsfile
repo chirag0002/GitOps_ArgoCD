@@ -63,13 +63,16 @@ pipeline{
                 }
             }
         }
+        stage ('Update Kubernetes Deployment'){
 
-        stage ('trigger congig CD changes'){
             steps{
                 script{
                     sh """
-sh "curl -v -k -user chirag:11b5fc0958c09d3380e33c97d64cb619e0 -X POST -H 'cache-control: no-cache' -H 'content-type: application/x-ww-form-urlencoded' -data 'IMAGE_TAG=${IMAGE_TAG}' 'http://3.108.219.154:8080/job/GitOps_CD/buildWithParameters?token=token'"                    """
-               }
+                    cat deployment.yml
+                    sed -i 's/${APP_NAME}.*/${APP_NAME}:${IMAGE_TAG}/g' deployment.yml
+                    cat deployment.yml
+                    """
+                }
             }
         }
     }
