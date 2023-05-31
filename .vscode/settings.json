@@ -3,7 +3,7 @@
         "GitOps": {
             "isDefault": true,
             "runWith": "Jenkins-Initial",
-            "name": "GitOps",
+            "name": "GitOps_CD",
         }  
     },
     "jenkins-runner.hostConfigs": {
