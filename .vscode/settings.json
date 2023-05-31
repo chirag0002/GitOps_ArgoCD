@@ -8,7 +8,7 @@
     },
     "jenkins-runner.hostConfigs": {
         "Jenkins-Initial": {
-            "url": "http://13.233.0.44:8080",
+            "url": "http://3.108.219.154:8080/",
             "user": "chirag",
             "password": "0015",
             "useCrumbIssuer": true,

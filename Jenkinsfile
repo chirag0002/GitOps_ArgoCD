@@ -67,8 +67,9 @@ pipeline{
         stage ('trigger congig CD changes'){
             steps{
                 script{
-                    sh "curl -v -k -user chirag:11b5fc0958c09d3380e33c97d64cb619e0 -X POST -H 'cache-control: no-cache' -H 'content-type: application/x-ww-form-urlencoded' -data 'IMAGE_TAG=${IMAGE_TAG}' 'http://13.233.0.44:8080/job/GitOps_CD/buildWithParameters?token=token'"
-                }
+                    sh """
+sh "curl -v -k -user chirag:11b5fc0958c09d3380e33c97d64cb619e0 -X POST -H 'cache-control: no-cache' -H 'content-type: application/x-ww-form-urlencoded' -data 'IMAGE_TAG=${IMAGE_TAG}' 'http://3.108.219.154:8080/job/GitOps_CD/buildWithParameters?token=token'"                    """
+               }
             }
         }
     }
